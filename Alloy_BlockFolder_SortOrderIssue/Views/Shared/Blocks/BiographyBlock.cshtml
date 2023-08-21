@@ -1,0 +1,29 @@
+﻿
+@model BiographyBlock
+@{
+    var bluebackgroundCss = "red";
+
+    var image = Url.ContentUrl(Model.Image);
+    var bioURL = @Model.BioLink != null ? @Model.BioLink : null;
+}
+<div class="spotlight @bluebackgroundCss p-8">
+    <div class="flex flex-col text-center items-center pb-4">
+        <h2>@Html.PropertyFor(x => x.Heading)</h2>
+        @if (!string.IsNullOrWhiteSpace(image))
+        {
+            <div data-bg="@image" class="lazyload rounded-full profile-img bg-center bg-cover mb-4"></div>
+        }
+        <h3 class="pb-2">@Html.PropertyFor(x => x.FirstName) @Html.PropertyFor(x => x.LastName)</h3>
+        <h3 class="pb-2">@Html.PropertyFor(x => x.Credentials)</h3>
+        <div class="text-blue">@Html.PropertyFor(x => x.JobTitle)</div>
+        <div class="text-blue">@Html.PropertyFor(x => x.Email)</div>
+
+        @if (!string.IsNullOrWhiteSpace(Model.BioLink))
+        {
+    <div class="flex link-icon-container items-center justify-center">
+        <a href="@bioURL" class="text-lightblue block text-center">@Model.BioLink</a>
+    </div>
+        }
+    </div>
+    <p class="text-blue">@Html.PropertyFor(x => x.Bio)</p>
+</div>
